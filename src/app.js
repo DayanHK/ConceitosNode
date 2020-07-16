@@ -7,7 +7,7 @@ const app = express();
 function validateId(request, response, next){
   const { id } = request.params;
   if(!isUuid(id)){
-    return response.json({ Error : 'Incorrect ID' });
+    return response.status(400).json({ Error : 'Incorrect ID' });
   }
   next();
 }
