@@ -25,8 +25,8 @@ app.get("/repositories", (request, response) => {
 
 app.post("/repositories", (request, response) => {
   const { title, url, techs} = request.body;
-  const like = 0;
-  const repository = {id:uuid(), title, url, techs, like};
+  const likes = 0;
+  const repository = {id:uuid(), title, url, techs, likes};
 
   repositories.push(repository);
   return response.json(repository);
@@ -40,8 +40,8 @@ app.put("/repositories/:id", (request, response) => {
     return response.status(400).json({error:'Repository not found'});
   }
 
-  var like = (repositories[repositoryIndex].like);
-  const repository ={ id, title, url, techs, like }
+  var likes = (repositories[repositoryIndex].likes);
+  const repository ={ id, title, url, techs, likes }
   repositories[repositoryIndex] = repository;
 
   return response.json(repository);
@@ -67,21 +67,21 @@ app.post("/repositories/:id/like", (request, response) => {
     var title = (repositories[repositoryIndex].title);
     var url = (repositories[repositoryIndex].url);
     var techs = (repositories[repositoryIndex].techs);
-    var like = (repositories[repositoryIndex].like);
+    var likes = (repositories[repositoryIndex].likes);
 
-    like = parseInt(like);
+    like = parseInt(likes);
 
-    if (isNaN(like) === true || like === 'undefined') {
-      like = 0;
-      like = like + 1;
+    if (isNaN(likes) === true || like === 'undefined') {
+      likes = 0;
+      likes = likes + 1;
     } 
     else {
-      like = like + 1;
+      likes = likes + 1;
     }
 
   }
   
-  const repository = {id, title, url, techs, like};
+  const repository = {id, title, url, techs, likes};
   repositories[repositoryIndex] = repository;
   return response.json(repository);
 });
